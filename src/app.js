@@ -5,14 +5,29 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.get("/teste", (req, res) => {
-    res.send("deu certo carai");
+const usuario = [];
+const tweets = [];
+
+app.post("/sign-up", (req, res) => {
+    const { username, avatar } = req.body;
+    const userON = { username, avatar};
+    usuario.push(userON);
+    res.send("OK");
+    console.log(usuario);
 })
 
-app.post("/testando", (req, res)=> {
-    res.send("postouuuuu");
+app.get("/tweets", (req, res) => {
+
+    res.send(tweets);
+})
+
+app.post("/tweets", (req, res) => {
+    const { username, tweet } = req.body;
+    const tweetON = { username, tweet };
+    tweets.push(tweetON);
+    res.send(tweetON);
 })
 
 
 
-app.listen(5000, ()=> console.log("servidor rodando no 5000"));
+app.listen(5000, () => console.log("servidor rodando no 5000"));
