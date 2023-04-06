@@ -9,7 +9,7 @@ app.get("/teste", (req, res) => {
     res.send("deu certo carai");
 })
 
-app.post("/testando", (req, res)=>{
+app.post("/testando", (req, res)=> {
     res.send("postouuuuu");
 })
 
