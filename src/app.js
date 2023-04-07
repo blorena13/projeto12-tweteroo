@@ -17,8 +17,8 @@ app.post("/sign-up", (req, res) => {
 })
 
 app.get("/tweets", (req, res) => {
-
-    res.send(tweets);
+const lastTweet = tweets.slice(-10);
+    res.send(lastTweet);
 })
 
 app.post("/tweets", (req, res) => {
