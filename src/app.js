@@ -11,15 +11,21 @@ let avatar = '';
 
 app.post("/sign-up", (req, res) => {
     const { username, avatar: userAvatar } = req.body;
+
+    if (!username || typeof username !== 'string' && !avatar || typeof avatar !== 'string') {
+        res.status(400).send("Todos os campos são obrigatórios!");
+        return;
+    }
+
     avatar = userAvatar;
-    const userON = { username, avatar: userAvatar};
+    const userON = { username, avatar: userAvatar };
     usuario.push(userON);
-    res.send("OK");
+    res.status(201).send("OK");
     console.log(usuario);
 })
 
 app.get("/tweets", (req, res) => {
-const lastTweet = tweets.slice(-10).map(t => ({ ...t, avatar}));
+    const lastTweet = tweets.slice(-10).map(t => ({ ...t, avatar }));
     res.send(lastTweet);
 })
 
@@ -27,11 +33,11 @@ app.post("/tweets", (req, res) => {
     const { username, tweet } = req.body;
 
     const user = usuario.find(u => u.username === username);
-    if(!user){
+    if (!user) {
         res.status(401).send("UNAUTHORIZED");
         return;
     }
-    const tweetON = { username, tweet};
+    const tweetON = { username, tweet };
     tweets.push(tweetON);
     res.send(tweetON);
 })
